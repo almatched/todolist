@@ -119,7 +119,7 @@ app.post("/delete", function(req, res) {
   const listName = req.body.listName;
 
   if (listName === "Today") {
-    Item.findByIdAndRemove()
+    Item.findByIdAndRemove(itemID)
     .then(() => res.redirect("/"))
     .catch(err => console.log(err));
   } else {
@@ -129,10 +129,11 @@ app.post("/delete", function(req, res) {
   }
 });
 
-// if () {
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port = 3000;
+}
 
-// }
-
-app.listen(3000, function() {
-  console.log("Server started on port 3000");
+app.listen(port, function() {
+  console.log("Server started on port" + port);
 });
